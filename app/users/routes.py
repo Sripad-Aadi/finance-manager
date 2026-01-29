@@ -78,6 +78,7 @@ def logout():
     session.clear()
     response = redirect(url_for('main.home'))
     # Delete session cookie completely
+    response.delete_cookie('remember_token')
     response.delete_cookie('session')
     # Prevent browser back-forward cache
     response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate, private, max-age=0'
