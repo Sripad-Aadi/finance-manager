@@ -4,6 +4,7 @@ from logging.handlers import RotatingFileHandler
 from dotenv import load_dotenv
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFProtect
+from app.main.utilities import get_category_color,get_category_icon
 
 load_dotenv()
 
@@ -117,5 +118,10 @@ def create_app(config_class=None):
         app.logger.addHandler(file_handler)
         app.logger.setLevel(logging.INFO)
         app.logger.info('Finance Tracker startup')
+        
+    app.jinja_env.globals.update(
+        get_category_color=get_category_color,
+        get_category_icon =  get_category_icon
+    )
     
     return app
