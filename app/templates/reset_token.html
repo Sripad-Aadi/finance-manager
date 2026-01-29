@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+
+{% block title %}Reset Password - Finance Tracker{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg">
+            <div class="card-header text-center bg-gradient-primary text-white py-4">
+                <h2 class="mb-0">
+                    Set New Password
+                </h2>
+                <p class="mb-0 mt-2" style="font-size: 0.9rem; opacity: 0.9;">Choose a strong password</p>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    
+                    <!-- Password Field -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock text-primary"></i> Password
+                        </label>
+                        <div class="input-group">
+                            {{ form.password(class="form-control form-control-sm", placeholder="Create a strong password", id="password") }}
+                            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                <i class="fas fa-eye" id="eyeIcon"></i>
+                            </button>
+                        </div>
+                        {% if form.password.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.password.errors %}
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle"></i> At least 6 characters
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="mb-4">
+                        <label for="confirmPassword" class="form-label">
+                            <i class="fas fa-lock text-primary"></i> Confirm Password
+                        </label>
+                        {{ form.confirmPassword(class="form-control form-control-sm", placeholder="Re-enter your password", id="confirmPassword") }}
+                        {% if form.confirmPassword.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.confirmPassword.errors %}
+                                    <i class="fas fa-exclamation-circle"></i> {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function() {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        
+        // Toggle eye icon
+        eyeIcon.classList.toggle('fa-eye');
+        eyeIcon.classList.toggle('fa-eye-slash');
+    });
+
+    // Form validation feedback
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        
+        if (password !== confirmPassword) {
+            e.preventDefault();
+            alert('Passwords do not match!');
+        }
+    });
+</script>
+{% endblock %}

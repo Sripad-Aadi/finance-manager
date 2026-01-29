@@ -1,0 +1,277 @@
+{% extends "layout.html" %}
+
+{% block title %}My Account - Finance Tracker{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1>My Account</h1>
+    <p>Manage your profile information</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        
+        <!-- Profile Information Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-user me-2"></i>Profile Information</h5>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form1.hidden_tag() }}
+                    <input type="hidden" name="form_type" value="profile">
+                    
+                    <!-- Profile Picture Section -->
+                    <div class="text-center mb-4">
+                        <div class="mb-3">
+    
+                            <img class="rounded-circle account-img" src="{{ image_file }}?v={{ range(1, 10000) | random }}" alt="Profile Picture" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid var(--primary-color);">
+                        </div>
+                        <div class="mb-3">
+                            <label for="picture" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-camera me-2"></i>Change Picture
+                            </label>
+                            {{ form1.picture(class="d-none", id="picture", accept="image/*") }}
+                        </div>
+                        <small class="text-muted">JPG, PNG or GIF (Max size: 2MB)</small>
+                        {% if form1.picture.errors %}
+                            <div class="text-danger small mt-2">
+                                {% for error in form1.picture.errors %}
+                                    <i class="fas fa-exclamation-circle me-1"></i>{{ error }}<br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <hr class="mb-4">
+                    
+                    <!-- User Information Fields -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-user text-primary me-1"></i>Username
+                            </label>
+                            {% if form1.username.errors %}
+                                {{ form1.username(class="form-control form-control-sm is-invalid", placeholder=current_user.username, id="username") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form1.username.errors %}
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}<br>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form1.username(class="form-control form-control-sm", placeholder=current_user.username, id="username") }}
+                            {% endif %}
+                            <small class="text-muted">Your unique username</small>
+                        </div>
+                        
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <i class="fas fa-envelope text-primary me-1"></i>Email Address
+                            </label>
+                            {% if form1.email.errors %}
+                                {{ form1.email(class="form-control form-control-sm is-invalid", placeholder=current_user.email, id="email") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form1.email.errors %}
+                                        <i class="fas fa-exclamation-circle me-1"></i>{{ error }}<br>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form1.email(class="form-control form-control-sm", placeholder=current_user.email, id="email") }}
+                            {% endif %}
+                            <small class="text-muted">Your email address</small>
+                        </div>
+                    </div>
+                    
+                    <hr class="mt-4">
+                    
+                    <div class="d-flex justify-content-end gap-2">
+                        <a href="{{ url_for('users.account') }}" class="btn btn-secondary">
+                            <i class="fas fa-times me-2"></i>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-primary" name="form1_submit" value="form1_submit">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Change Password Card -->
+        <div class="card mb-4 shadow-sm border-0 password-card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-lock me-2"></i>Change Password
+                </h5>
+            </div>
+
+            <div class="card-body bg-light">
+                <form method="POST" action="">
+                    {{form2.hidden_tag()}}
+                    <input type="hidden" name="form_type" value="password">
+
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-semibold text-primary">
+                                <i class="fas fa-key text-warning me-1"></i>
+                                Current Password
+                            </label>
+                            <input
+                                type="password"
+                                name="old_password"
+                                class="form-control password-input"
+                                placeholder="Enter your current password"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold text-primary">
+                                <i class="fas fa-lock text-warning me-1"></i>
+                                New Password
+                            </label>
+                            <input
+                                type="password"
+                                name="new_password"
+                                class="form-control password-input"
+                                placeholder="Enter new password"
+                                required
+                            >
+                            <small class="text-warning fw-medium">
+                                <i class="fas fa-info-circle"></i> Minimum 6 characters
+                            </small>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-semibold text-primary">
+                                <i class="fas fa-lock text-warning me-1"></i>
+                                Confirm New Password
+                            </label>
+                            <input
+                                type="password"
+                                name="confirm_password"
+                                class="form-control password-input"
+                                placeholder="Confirm new password"
+                                required
+                            >
+                        </div>
+                    </div>
+
+                    <hr class="mt-4">
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-warning fw-semibold px-4" name="form2_submit" value="form2_submit">
+                            <i class="fas fa-shield-alt me-2"></i>
+                            Update Password
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        
+        <!-- Logout Section -->
+        <div class="card border-danger">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1 text-danger">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout from Your Account
+                        </h6>
+                        <p class="text-muted mb-0 small">Sign out from all devices</p>
+                    </div>
+                    <a href="{{ url_for('users.logout') }}" class="btn btn-danger">
+                        <i class="fas fa-sign-out-alt me-2"></i>Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .account-img {
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+    }
+    
+    .account-img:hover {
+        transform: scale(1.05);
+    }
+    
+    .gap-2 {
+        gap: 0.5rem;
+    }
+
+    .password-card {
+        border-radius: 12px;
+    }
+
+    .password-card .card-header {
+        border-radius: 12px 12px 0 0;
+    }
+
+    .password-input:focus {
+        border-color: #0c0b08;
+        box-shadow: 0 0 0 0.15rem rgba(239, 241, 102, 0.35);
+    }
+
+    .text-warning {
+        color: #3860cd !important;
+    }
+
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Preview image before upload
+    document.getElementById('picture').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            // Check file size (2MB limit)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('File size must be less than 2MB');
+                this.value = '';
+                return;
+            }
+            
+            // Check file type
+            if (!file.type.startsWith('image/')) {
+                alert('Please select an image file');
+                this.value = '';
+                return;
+            }
+            
+            // Preview the image
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.querySelector('.account-img').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Password confirmation validation
+    const newPassword = document.querySelector('input[name="new_password"]');
+    const confirmPassword = document.querySelector('input[name="confirm_password"]');
+    
+    if (confirmPassword) {
+        confirmPassword.addEventListener('input', function() {
+            if (newPassword.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity('Passwords do not match');
+            } else {
+                confirmPassword.setCustomValidity('');
+            }
+        });
+    }
+</script>
+{% endblock %}

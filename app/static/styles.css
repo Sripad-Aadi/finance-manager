@@ -1,0 +1,584 @@
+/* ========================================
+   Finance Tracker - Main Stylesheet
+   ======================================== */
+
+/* CSS Variables for Theming */
+:root {
+    --primary-color: #4e73df;
+    --primary-dark: #2e59d9;
+    --success-color: #1cc88a;
+    --danger-color: #e74a3b;
+    --warning-color: #f6c23e;
+    --info-color: #36b9cc;
+    --dark-color: #5a5c69;
+    --light-gray: #f8f9fc;
+    --border-color: #e3e6f0;
+    --text-muted: #858796;
+    --shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* ========================================
+   Global Styles
+   ======================================== */
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--light-gray);
+    min-height: 100vh;
+    color: var(--dark-color);
+}
+
+/* ========================================
+   Navbar Styling
+   ======================================== */
+
+.navbar {
+    box-shadow: var(--shadow);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #224abe 100%);
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff !important;
+    transition: transform 0.2s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.navbar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    margin: 0 0.2rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-nav .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff !important;
+}
+
+.navbar-nav .nav-link i {
+    margin-right: 0.3rem;
+}
+
+/* ========================================
+   Main Content Container
+   ======================================== */
+
+.main-content {
+    padding: 2rem 0;
+    min-height: calc(100vh - 120px);
+}
+
+/* ========================================
+   Flash Messages
+   ======================================== */
+
+.flash-messages {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 9999;
+    max-width: 400px;
+}
+
+.alert {
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    animation: slideIn 0.3s ease-out;
+    border: none;
+}
+
+.alert i {
+    margin-right: 0.5rem;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ========================================
+   Card Styling
+   ======================================== */
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0.5rem 2rem 0 rgba(58, 59, 69, 0.2);
+}
+
+.card-header {
+    background-color: var(--light-gray);
+    border-bottom: 1px solid var(--border-color);
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 1rem 1.25rem;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-footer {
+    background-color: var(--light-gray);
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+}
+
+/* Dashboard Stats Cards */
+.stat-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.stat-card.income {
+    border-left-color: var(--success-color);
+}
+
+.stat-card.expense {
+    border-left-color: var(--danger-color);
+}
+
+.stat-card.balance {
+    border-left-color: var(--primary-color);
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-color);
+}
+
+.stat-card .stat-label {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+}
+
+/* ========================================
+   Forms
+   ======================================== */
+
+.form-control,
+.form-select {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    padding: 0.625rem 0.75rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--dark-color);
+    margin-bottom: 0.5rem;
+}
+
+.invalid-feedback {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* ========================================
+   Buttons
+   ======================================== */
+
+.btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    border-color: #2653d4;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.btn-success:hover {
+    background-color: #17a673;
+    border-color: #169b6b;
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: #e02d1b;
+    border-color: #d52a1a;
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    border-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.btn-info {
+    background-color: var(--info-color);
+    border-color: var(--info-color);
+}
+
+/* Button Sizes */
+.btn-sm {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.btn-lg {
+    padding: 0.75rem 2rem;
+    font-size: 1.125rem;
+}
+
+/* ========================================
+   Tables
+   ======================================== */
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: var(--light-gray);
+    color: var(--dark-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.05rem;
+    padding: 1rem 0.75rem;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f1f3f9;
+}
+
+.table td {
+    padding: 0.875rem 0.75rem;
+    vertical-align: middle;
+}
+
+/* Transaction Type Badges */
+.badge-income {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge-expense {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* ========================================
+   Dropdown Menu
+   ======================================== */
+
+.dropdown-menu {
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    border: none;
+    margin-top: 0.5rem;
+}
+
+.dropdown-item {
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--light-gray);
+}
+
+.dropdown-item i {
+    margin-right: 0.5rem;
+    width: 20px;
+    text-align: center;
+}
+
+.dropdown-divider {
+    margin: 0.5rem 0;
+}
+
+/* ========================================
+   Page Headers
+   ======================================== */
+
+.page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.page-header h1 {
+    color: var(--dark-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.page-header p {
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+
+footer {
+    background-color: #fff;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -0.15rem 1.75rem 0 rgba(58, 59, 69, 0.05);
+}
+
+footer p {
+    margin-bottom: 0.25rem;
+}
+
+footer small {
+    color: var(--text-muted);
+}
+
+/* ========================================
+   Utilities
+   ======================================== */
+
+/* Text Colors */
+.text-primary { color: var(--primary-color) !important; }
+.text-success { color: var(--success-color) !important; }
+.text-danger { color: var(--danger-color) !important; }
+.text-warning { color: var(--warning-color) !important; }
+.text-info { color: var(--info-color) !important; }
+.text-muted { color: var(--text-muted) !important; }
+
+
+/* Account image*/
+.account-img {
+  height: 100px;
+  width: 100px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+/* Background Colors */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+}
+
+.empty-state i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.empty-state h3 {
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+/* Loading Spinner */
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+/* ========================================
+   Authentication Pages
+   ======================================== */
+
+.auth-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+}
+
+.auth-card {
+    max-width: 450px;
+    width: 100%;
+}
+
+.auth-card .card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.auth-card .card-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+.auth-card .card-header h2 {
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 768px) {
+    .flash-messages {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+
+    .main-content {
+        padding: 1rem 0;
+    }
+
+    .stat-card .stat-value {
+        font-size: 1.5rem;
+    }
+
+    .page-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .card {
+        margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn {
+        padding: 0.4rem 1rem;
+        font-size: 0.875rem;
+    }
+
+    .stat-card .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+
+@media print {
+    .navbar,
+    .flash-messages,
+    footer,
+    .btn,
+    .no-print {
+        display: none !important;
+    }
+
+    .main-content {
+        padding: 0;
+    }
+
+    .card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}
+
+/* Category Progress Bars */
+.progress {
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* Category Icons */
+.category-icon-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Top Categories Card */
+.top-category-item {
+    transition: transform 0.2s ease;
+}
+
+.top-category-item:hover {
+    transform: translateX(5px);
+}
+
+/* Smooth collapse animation */
+#allCategories {
+    transition: all 0.3s ease;
+}

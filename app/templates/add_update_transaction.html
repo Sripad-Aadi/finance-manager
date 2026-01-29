@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-plus-circle"></i> {{purpose}} Transaction</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Transaction Type</label>
+                        {{ form.type(class="form-select", id="type") }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        {{ form.category(class="form-select", id="category") }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Amount</label>
+                        {{ form.amount(class="form-control", placeholder="0.00") }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Date</label>
+                        {{ form.date(class="form-control") }}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Description (Optional)</label>
+                        {{ form.description(class="form-control", rows="3") }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> {{purpose}} Transaction
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+document.getElementById("type").addEventListener("change", function () {
+    const type = this.value;
+    const categorySelect = document.getElementById("category");
+
+    fetch(`/transaction/categories?type=${type}`)
+        .then(response => response.json())
+        .then(data => {
+            categorySelect.innerHTML = "";
+
+            data.forEach(cat => {
+                const option = document.createElement("option");
+                option.value = cat.value;
+                option.textContent = cat.label;
+                categorySelect.appendChild(option);
+            });
+        });
+});
+</script>
+{% endblock %}
