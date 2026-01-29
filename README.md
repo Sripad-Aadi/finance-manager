@@ -152,7 +152,7 @@ FinanceTracker/
 ├── wsgi.py                      # Production WSGI entry point
 ├── init_db.py                   # Database initialization
 ├── requirements.txt             # Python dependencies
-├── .env.example                 # Environment variables template
+├── .env                         # Environment variables template
 └── README.md                    # This file
 ```
 
