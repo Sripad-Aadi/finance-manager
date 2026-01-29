@@ -33,7 +33,7 @@ A comprehensive personal finance management web application built with Flask. Tr
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Sripad-Aadi/finance-manager.git
    cd FinanceTracker
    ```
 
@@ -56,7 +56,7 @@ A comprehensive personal finance management web application built with Flask. Tr
 4. **Configure environment variables**
    ```bash
    # Copy the example file
-   cp .env.example .env
+   cp .env
    
    # Edit .env with your configuration
    ```
@@ -292,48 +292,10 @@ python init_db.py
 python run.py --port 5001
 ```
 
-## Future Enhancements
-
-- [ ] Two-factor authentication (2FA)
-- [ ] Recurring transactions
-- [ ] Budget management and alerts
-- [ ] Mobile app companion
-- [ ] Multi-currency support
-- [ ] Data visualization improvements
-- [ ] API for integrations
-- [ ] Advanced reporting
-- [ ] Custom categories
-- [ ] Transaction tags and notes
-
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Support
-
-For support, email support@financetracker.com or open an issue in the repository.
-
-## Changelog
-
-### Version 1.0.0 (Current)
-- Initial release
-- User authentication system
-- Transaction management
-- Dashboard analytics
-- Data export functionality
-
----
 
 **Last Updated**: January 2026
 
-For detailed security and deployment guidance, see [PROJECT_REVIEW.md](PROJECT_REVIEW.md)
