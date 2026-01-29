@@ -1,5 +1,6 @@
 import os
 import secrets
+from threading import Thread
 from flask import current_app,url_for
 from app import mail
 from flask_mail import Message
@@ -65,4 +66,11 @@ Finance Tracker Team
     </div>
     '''
     
-    mail.send(msg)
+    Thread(
+        target=send_async_email,
+        args=(current_app._get_current_object(), msg)
+    ).start()
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
