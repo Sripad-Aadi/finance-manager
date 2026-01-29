@@ -15,7 +15,7 @@ from flask_mail import Mail
 from flask_caching import Cache
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-
+from werkzeug.middleware.proxy_fix import ProxyFix
 db = SQLAlchemy()
 bcrypt = Bcrypt()
 login_manager = LoginManager()
@@ -107,7 +107,7 @@ def create_app(config_class=None):
         app.logger.setLevel(logging.INFO)
         app.logger.info('Finance Tracker startup')
     
-    from werkzeug.middleware.proxy_fix import ProxyFix
+    
     app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
     from app.main.utilities import (
