@@ -73,7 +73,6 @@ htmlcov/
 # Deployment
 Procfile
 runtime.txt
-wsgi.py
 
 # IDE files
 .editorconfig
