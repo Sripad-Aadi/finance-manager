@@ -1,4 +1,4 @@
-# Finance Tracker
+# FinScope
 
 A comprehensive personal finance management web application built with Flask. Track income and expenses, visualize spending patterns, and manage your financial data efficiently.
 
